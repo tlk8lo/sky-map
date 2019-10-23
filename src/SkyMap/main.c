@@ -392,20 +392,13 @@ int main(void)
 			
 			dcf_state = new_dcf_state;
 		}
-		
-		// SYNC edge interrupt
-		if (EIFR & (1<<INTF0))
-		{
-			EIFR = (1<<INTF0);
-			ms_sync = 0;
-		}
 
 		// SYNC timer overflow
 		if (ms_sync == SYNC_DEB_THRES)
 		{
 			uint8_t new_sync_state = SYNC_PIN & (1<<SYNC_BIT);
 			
-			if (sync_state && !new_sync_state && direction == FWD)
+			if (!new_sync_state && sync_state && direction == FWD)
 			{
 				cli();
 #ifdef DEBUG
@@ -422,7 +415,13 @@ int main(void)
 			
 			sync_state = new_sync_state;
 		}
-
 		cli();
+		
+		// SYNC edge interrupt
+		if (EIFR & (1<<INTF0))
+		{
+			EIFR = (1<<INTF0);
+			ms_sync = 0;
+		}
 	}
 }
