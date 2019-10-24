@@ -52,7 +52,7 @@
 #define STEPS_PER_ROT	49421
 #define STEPS_OCR		57163
 #define STEPS_COMP		122
-#define STEPS_OFFSET	14144
+#define STEPS_OFFSET	14414
 
 /*
 	Minutes to angle conversion consts
