@@ -2,11 +2,11 @@
 
 // 8-bit BCD decoder
 // Requires n > 0
-static uint8_t dcf_decode_bcd( uint8_t *frame, uint8_t start, uint8_t n )
+static uint8_t dcf_decode_bcd( const uint8_t *frame, uint8_t start, uint8_t n )
 {
 	uint8_t val = 0;
 	uint8_t b = 1;
-	uint8_t *end;
+	const uint8_t *end;
 	
 	frame += start;
 	end = frame + n;
@@ -23,10 +23,10 @@ static uint8_t dcf_decode_bcd( uint8_t *frame, uint8_t start, uint8_t n )
 }
 
 // Checks parity of `n' bits starting at `start'
-static uint8_t dcf_parity( uint8_t *frame, uint8_t start, uint8_t n )
+static uint8_t dcf_parity( const uint8_t *frame, uint8_t start, uint8_t n )
 {
 	uint8_t parity = 0;
-	uint8_t *end;
+	const uint8_t *end;
 	
 	frame += start;
 	end = frame + n;
@@ -54,7 +54,7 @@ static uint8_t month_len( uint8_t month, uint8_t year )
 }
 
 // Check if frame is valid
-uint8_t dcf_validate( uint8_t* frame )
+uint8_t dcf_validate( const uint8_t* frame )
 {
 	// Validate frame
 	if ( frame[0] ) return 0;   // Start of minute - bit0 shall be 0
@@ -68,7 +68,7 @@ uint8_t dcf_validate( uint8_t* frame )
 }
 
 // Convert DCF77 frame to minutes since 00:00 01.01.2000
-uint32_t dcf_parse( uint8_t *frame )
+uint32_t dcf_parse( const uint8_t *frame )
 {	
 	// Calculate YEARS
 	uint8_t years = dcf_decode_bcd( frame, 50, 8 );			// 8 bits - year

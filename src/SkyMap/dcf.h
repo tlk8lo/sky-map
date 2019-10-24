@@ -3,7 +3,7 @@
 
 #include <inttypes.h>
 
-extern uint8_t dcf_validate( uint8_t* frame );
-extern uint32_t dcf_parse( uint8_t* frame );
+extern uint8_t dcf_validate( const uint8_t* frame );
+extern uint32_t dcf_parse( const uint8_t* frame );
 
 #endif
