@@ -1,6 +1,6 @@
 # Obrotowa mapa nieba
 
-* Obrotowa mapa nieba ukazująca stan gwiazd na niebie z 12 godzinnym wyprzedzeniem.
+* Ukazuje wygląd nieba z 12 godzinnym wyprzedzeniem
 
 * Synchronizuje się automatycznie z sygnałem DCF-77
 
