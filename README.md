@@ -1,9 +1,3 @@
 # Obrotowa mapa nieba
 
-* Ukazuje wygląd nieba z 12 godzinnym wyprzedzeniem
-
-* Synchronizuje się automatycznie z sygnałem DCF-77
-
-* Mapa nie wymaga interwencji człowieka do działania.
-
-:stars: :stars: :stars:
+Obrotowa mapa nieba przedstawia wygląd nocnego nieba z 12-godzinnym wyprzedzeniem na podstawie daty i godziny odebranej z nadajnika DCF77. Urządzenie z założenia ma być autonomiczne i ma nie wymagać jakiejkolwiek ręcznej konfiguracji przez człowieka.
