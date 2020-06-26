@@ -9,14 +9,15 @@ Obrotowa mapa nieba przedstawia wygląd nocnego nieba z 12-godzinnym wyprzedzeni
 ## Budowa
 
 Wewnątrz obudowy znajduje się tarcza, która opiera się na dwóch kołach zębatych wydrukowanych w 3D. Jedno z nich jest napędzane przez silnik krokowy.
+_Istotne jest, by podczas transportu mapy uważać, aby tarcza nie wypadła z zawieszenia._
 
-Obwód elektroniczny składa się z mikrokontrolera AVR ATtiny2313, modułu odbiornika sygnału DCF77, układu ULN2803 sterującego silnikiem krokowym oraz czujnika optycznego, dzięki któremu możliwe jest ustalenie położenia tarczy po włączeniu zasilania.
+Obwód elektroniczny składa się z mikrokontrolera AVR ATtiny2313, modułu odbiornika sygnału radiowego DCF77, układu ULN2803 sterującego silnikiem krokowym oraz czujnika optycznego, dzięki któremu możliwe jest ustalenie położenia tarczy po włączeniu zasilania.
 
 ## Program
 
 Mikrokontroler odbiera sygnał z modułu DCF77 i przekształca go na liczbę minut od 00:00 01.01.2000. Na tej podstawie oblicza żądany kąt ustawienia tarczy `desired_angle`, który jest inkrementowany co odpowiedni czas. Tarcza obraca się dopóki aktualny kąt `current_angle` jest różny od `desired_angle`.
 
-Kąt jest obliczany na podstawie faktu, że w ciągu roku, mapa powinna obrócić się (365,25 + 1) razy. Szczegółowy sposób obliczania kąta jest zawarty w komentarzach w pliku [main.c](src/SkyMap/main.c).
+Kąt jest obliczany na podstawie faktu, że w ciągu roku, mapa powinna obrócić się (365,25 + 1) razy. Szczegółowy sposób obliczania kąta jest opisany w komentarzach w pliku [main.c](src/SkyMap/main.c).
 
 Jeżeli program jest skompilowany jako DEBUG, mikrokontroler zapisuje do pamięci EEPROM szczegóły ostatnio odebranych ramek DCF77 oraz informacje z czujnika optycznego.
 
@@ -24,9 +25,9 @@ Jeżeli program jest skompilowany jako DEBUG, mikrokontroler zapisuje do pamięc
 
 Po włączeniu zasilania, mapa:
 
-1. Obraca się do pozycji początkowej (do napotkania na czujnik optyczny)
-2. Czeka na odebranie ramki DCF77 w celu synchronizacji czasu
-3. Po odebraniu ramki, obraca się w czasie rzeczywistym
+1. Obraca się do pozycji początkowej (do odebrania sygnału z czujnika optycznego)
+2. Nieruchomo czeka na odebranie poprawnej ramki DCF77 w celu synchronizacji czasu
+3. Po odebraniu ramki, mapa "szybko" obraca się do pożądanego położenia, a następnie kontynuuje obrót w czasie rzeczywistym
 4. Koryguje obroty, gdy odbierze kolejne ramki lub napotka na czujnik optyczny
 
 ## Wskaźniki
